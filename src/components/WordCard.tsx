@@ -7,19 +7,28 @@ interface WordCardProps {
   word: string;
   id: string;
   onGreenChange?: (isGreen: boolean) => void;
+  onBypasserChange?: (isActive: boolean) => void;
 }
 
-const WordCard: React.FC<WordCardProps> = ({ word, id, onGreenChange }) => {
+const WordCard: React.FC<WordCardProps> = ({ word, id, onGreenChange, onBypasserChange }) => {
   const [selected, setSelected] = useState(false);
   const [downSelected, setDownSelected] = useState(false);
   const [isGreen, setIsGreen] = useState(false);
   
   const toggleSelected = () => {
-    setSelected(prev => !prev);
+    const newState = !selected;
+    setSelected(newState);
+    if (onBypasserChange) {
+      onBypasserChange(newState);
+    }
   };
 
   const toggleDownSelected = () => {
-    setDownSelected(prev => !prev);
+    const newState = !downSelected;
+    setDownSelected(newState);
+    if (onBypasserChange) {
+      onBypasserChange(newState);
+    }
   };
 
   const toggleGreen = () => {

@@ -136,7 +136,8 @@
   .upside-down-title {
     transform: rotate(180deg);
     opacity: 0.5;
-    font-size: 14px;
+    font-size: 18px; /* Match the main word size */
+    font-weight: 600; /* Make it bold */
     letter-spacing: 1px;
     text-transform: uppercase;
     position: absolute;
@@ -159,16 +160,21 @@
     padding: 8px 10px;
     border-radius: 4px;
     text-align: center;
-    font-weight: 600;
+    font-weight: 700; /* Increased boldness */
     font-size: 18px;
     line-height: 1.2;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     margin-bottom: 6px;
   }
 
-  .green-counter {
+  .green-counter, .bypassers-counter {
     background-color: #F2FCE2;
     border: 1px solid rgba(74, 222, 128, 0.3);
     transition: all 0.3s ease;
+  }
+
+  .bypassers-counter {
+    background-color: #E5DEFF;
+    border: 1px solid rgba(139, 92, 246, 0.3);
   }
 }
