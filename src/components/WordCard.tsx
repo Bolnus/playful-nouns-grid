@@ -6,9 +6,10 @@ import { cn } from '@/lib/utils';
 interface WordCardProps {
   word: string;
   id: string;
+  onGreenChange?: (isGreen: boolean) => void;
 }
 
-const WordCard: React.FC<WordCardProps> = ({ word, id }) => {
+const WordCard: React.FC<WordCardProps> = ({ word, id, onGreenChange }) => {
   const [selected, setSelected] = useState(false);
   const [downSelected, setDownSelected] = useState(false);
   const [isGreen, setIsGreen] = useState(false);
@@ -22,7 +23,11 @@ const WordCard: React.FC<WordCardProps> = ({ word, id }) => {
   };
 
   const toggleGreen = () => {
-    setIsGreen(prev => !prev);
+    const newGreenState = !isGreen;
+    setIsGreen(newGreenState);
+    if (onGreenChange) {
+      onGreenChange(newGreenState);
+    }
   };
 
   return (
