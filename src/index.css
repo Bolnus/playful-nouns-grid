@@ -74,7 +74,8 @@
     justify-content: flex-end;
     overflow: hidden;
     transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1), 
-                box-shadow 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+                box-shadow 0.3s cubic-bezier(0.19, 1, 0.22, 1),
+                background-color 0.3s ease;
   }
 
   .word-card:hover {
@@ -133,13 +134,14 @@
 
   .upside-down-title {
     transform: rotate(180deg);
-    opacity: 0.2;
+    opacity: 0.5;
     font-size: 14px;
     letter-spacing: 1px;
     text-transform: uppercase;
     position: absolute;
-    top: -30px;
-    left: 0;
+    top: 12px;
+    left: 12px;
+    z-index: 1;
   }
 
   .card-id {
