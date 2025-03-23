@@ -101,6 +101,14 @@
     z-index: 0;
   }
 
+  .word-card.bg-green-100 .card-title {
+    background-color: #dcfce7; /* Light green background for the word when card is green */
+  }
+
+  .word-card.bg-green-100 .card-button {
+    border-color: rgba(0, 128, 0, 0.2); /* Green border for buttons when card is green */
+  }
+
   .card-button {
     position: absolute;
     top: 12px;
