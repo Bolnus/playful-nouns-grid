@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,8 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				cardBg: '#f6f3e4', // Cream card background color
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +86,43 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'appear': {
+					'0%': { 
+						opacity: '0',
+						transform: 'translateY(5px)'
+					},
+					'100%': { 
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'fade-in': {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' }
+				},
+				'scale': {
+					'0%': { transform: 'scale(0.95)' },
+					'100%': { transform: 'scale(1)' }
+				},
+				'button-press': {
+					'0%': { transform: 'scale(1)' },
+					'50%': { transform: 'scale(0.92)' },
+					'100%': { transform: 'scale(1)' }
+				},
+				'rotate-in': {
+					'0%': { transform: 'rotateX(-90deg)', opacity: '0' },
+					'100%': { transform: 'rotateX(0)', opacity: '1' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'appear': 'appear 0.4s ease-out',
+				'fade-in': 'fade-in 0.4s ease-out',
+				'scale': 'scale 0.3s ease-out',
+				'button-press': 'button-press 0.4s cubic-bezier(0.19, 1, 0.22, 1)',
+				'rotate-in': 'rotate-in 0.5s cubic-bezier(0.19, 1, 0.22, 1)'
 			}
 		}
 	},
