@@ -95,8 +95,6 @@ const WordCard: React.FC<WordCardProps> = ({ word, id, onGreenChange, onBypasser
       <div className="card-title-container">
         <div className="card-title">{word}</div>
       </div>
-      
-      <div className="card-id">{id}</div>
     </div>
   );
 };

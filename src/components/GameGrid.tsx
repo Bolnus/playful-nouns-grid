@@ -2,7 +2,7 @@
 import React, { useMemo, useState } from 'react';
 import { faker } from '@faker-js/faker';
 import WordCard from './WordCard';
-import { Plus, Minus } from 'lucide-react';
+import { Plus, Minus, ArrowUp, ArrowDown } from 'lucide-react';
 
 const generateRandomId = () => {
   const numbers = Array.from({ length: 4 }, () => 
@@ -64,7 +64,8 @@ const GameGrid: React.FC = () => {
         
         <div className="bypassers-counter p-2 sm:p-3 rounded-lg shadow-sm inline-flex items-center gap-2 text-sm sm:text-base">
           <div className="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center rounded-full bg-purple-500">
-            <span className="text-white text-[8px] sm:text-[10px]">↕</span>
+            <ArrowUp size={10} className="text-white" />
+            <ArrowDown size={10} className="text-white" />
           </div>
           <span className="font-semibold">{bypassersCount} bypassers</span>
         </div>
