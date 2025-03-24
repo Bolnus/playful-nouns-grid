@@ -54,7 +54,7 @@ const WordCard: React.FC<WordCardProps> = ({ word, id, onGreenChange, onBypasser
         )}
         aria-label={isGreen ? "Remove green highlight" : "Highlight card green"}
       >
-        <span className="w-4 h-4 rounded-full group-hover:bg-white/50"></span>
+        <span className="w-3 h-3 sm:w-4 sm:h-4 rounded-full group-hover:bg-white/50"></span>
       </button>
       
       {/* Up arrow button */}
@@ -65,11 +65,11 @@ const WordCard: React.FC<WordCardProps> = ({ word, id, onGreenChange, onBypasser
       >
         {selected ? (
           <ArrowUp 
-            size={16} 
+            size={14} 
             className="text-primary animate-rotate-in" 
           />
         ) : (
-          <span className="w-4 h-4 rounded-full group-hover:bg-gray-50"></span>
+          <span className="w-3 h-3 sm:w-4 sm:h-4 rounded-full group-hover:bg-gray-50"></span>
         )}
       </button>
       
@@ -81,11 +81,11 @@ const WordCard: React.FC<WordCardProps> = ({ word, id, onGreenChange, onBypasser
       >
         {downSelected ? (
           <ArrowDown
-            size={16}
+            size={14}
             className="text-primary animate-rotate-in"
           />
         ) : (
-          <span className="w-4 h-4 rounded-full group-hover:bg-gray-50"></span>
+          <span className="w-3 h-3 sm:w-4 sm:h-4 rounded-full group-hover:bg-gray-50"></span>
         )}
       </button>
       

@@ -56,35 +56,35 @@ const GameGrid: React.FC = () => {
   
   return (
     <>
-      <div className="flex gap-4 mb-6 flex-wrap">
-        <div className="green-counter p-3 rounded-lg shadow-sm inline-flex items-center gap-2">
-          <div className="w-4 h-4 rounded-full bg-green-500"></div>
-          <span className="font-semibold">{greenCount} green cards selected</span>
+      <div className="flex gap-2 mb-4 flex-wrap justify-center">
+        <div className="green-counter p-2 sm:p-3 rounded-lg shadow-sm inline-flex items-center gap-2 text-sm sm:text-base">
+          <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-green-500"></div>
+          <span className="font-semibold">{greenCount} green cards</span>
         </div>
         
-        <div className="bypassers-counter p-3 rounded-lg shadow-sm inline-flex items-center gap-2">
-          <div className="w-4 h-4 flex items-center justify-center rounded-full bg-purple-500">
-            <span className="text-white text-[10px]">↕</span>
+        <div className="bypassers-counter p-2 sm:p-3 rounded-lg shadow-sm inline-flex items-center gap-2 text-sm sm:text-base">
+          <div className="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center rounded-full bg-purple-500">
+            <span className="text-white text-[8px] sm:text-[10px]">↕</span>
           </div>
-          <span className="font-semibold">{bypassersCount} bypassers active</span>
+          <span className="font-semibold">{bypassersCount} bypassers</span>
         </div>
 
-        <div className="clear-rounds-counter p-3 rounded-lg shadow-sm inline-flex items-center gap-2 bg-blue-50 border border-blue-200">
+        <div className="clear-rounds-counter p-2 sm:p-3 rounded-lg shadow-sm inline-flex items-center gap-2 bg-blue-50 border border-blue-200 text-sm sm:text-base">
           <span className="font-semibold">Clear rounds: {clearRounds}</span>
           <div className="flex gap-1">
             <button 
               onClick={decrementClearRounds}
-              className="w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 transition-colors flex items-center justify-center"
+              className="w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-blue-100 hover:bg-blue-200 transition-colors flex items-center justify-center"
               aria-label="Decrease clear rounds"
             >
-              <Minus size={14} className="text-blue-700" />
+              <Minus size={12} className="text-blue-700" />
             </button>
             <button 
               onClick={incrementClearRounds}
-              className="w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 transition-colors flex items-center justify-center"
+              className="w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-blue-100 hover:bg-blue-200 transition-colors flex items-center justify-center"
               aria-label="Increase clear rounds"
             >
-              <Plus size={14} className="text-blue-700" />
+              <Plus size={12} className="text-blue-700" />
             </button>
           </div>
         </div>

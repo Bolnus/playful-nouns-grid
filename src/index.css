@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -39,27 +38,18 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "ss01" on, "ss02" on, "cv01" on, "cv03" on;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
   .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(5, 1fr);
+    gap: clamp(0.5rem, 2vw, 1.5rem);
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-  }
-
-  @media (min-width: 640px) {
-    .card-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .card-grid {
-      grid-template-columns: repeat(5, 1fr);
-    }
   }
 
   .word-card {
@@ -67,7 +57,7 @@
     aspect-ratio: 1.5 / 1;
     background-color: theme('colors.cardBg');
     border-radius: 8px;
-    padding: 12px;
+    padding: clamp(6px, 2vw, 12px);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     display: flex;
     flex-direction: column;
@@ -111,10 +101,10 @@
 
   .card-button {
     position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 28px;
-    height: 28px;
+    top: clamp(6px, 2vw, 12px);
+    right: clamp(6px, 2vw, 12px);
+    width: clamp(20px, 4vw, 28px);
+    height: clamp(20px, 4vw, 28px);
     border-radius: 50%;
     background-color: white;
     display: flex;
@@ -158,18 +148,18 @@
     position: absolute;
     bottom: 6px;
     right: 12px;
-    font-size: 10px;
+    font-size: clamp(7px, 1.5vw, 10px);
     opacity: 0.4;
     font-family: monospace;
   }
 
   .card-title {
     background-color: white;
-    padding: 8px 10px;
+    padding: clamp(4px, 1.5vw, 8px) clamp(5px, 2vw, 10px);
     border-radius: 4px;
     text-align: center;
     font-weight: 700; /* Increased boldness */
-    font-size: 18px;
+    font-size: clamp(12px, 3vw, 18px);
     line-height: 1.2;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     margin-bottom: 6px;
