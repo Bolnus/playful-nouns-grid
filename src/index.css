@@ -183,6 +183,10 @@
     .card-title {
       font-size: 16px;
     }
+
+    .card-grid {
+      gap: clamp(0.3rem, 1.5vw, 1rem);
+    }
   }
 
   @media (max-width: 768px) {
@@ -199,6 +203,10 @@
     .card-button {
       width: 22px;
       height: 22px;
+    }
+
+    .card-grid {
+      gap: clamp(0.2rem, 1vw, 0.7rem);
     }
   }
 
@@ -217,6 +225,83 @@
     .card-button {
       width: 18px;
       height: 18px;
+    }
+
+    .card-grid {
+      gap: 0.2rem;
+    }
+  }
+
+  /* New height-based media queries for vertical responsiveness */
+  @media (max-height: 900px) {
+    .word-card {
+      padding: clamp(4px, 1.5vw, 10px);
+    }
+    
+    .card-button {
+      top: clamp(4px, 1.5vw, 10px);
+    }
+    
+    .upside-down-title {
+      top: 32px;
+    }
+    
+    .card-grid {
+      gap: clamp(0.3rem, 1.5vh, 1rem);
+    }
+  }
+
+  @media (max-height: 700px) {
+    .word-card {
+      padding: clamp(3px, 1vw, 8px);
+    }
+    
+    .card-button {
+      width: 20px;
+      height: 20px;
+      top: clamp(3px, 1vw, 8px);
+    }
+    
+    .upside-down-title {
+      font-size: 14px;
+      top: 26px;
+    }
+    
+    .card-title {
+      margin-bottom: 3px;
+      padding: 3px 6px;
+    }
+    
+    .card-grid {
+      gap: 0.3rem;
+    }
+  }
+
+  @media (max-height: 600px) {
+    .word-card {
+      padding: 3px;
+    }
+    
+    .card-button {
+      width: 16px;
+      height: 16px;
+      top: 3px;
+    }
+    
+    .upside-down-title {
+      font-size: 12px;
+      top: 22px;
+      left: 6px;
+    }
+    
+    .card-title {
+      font-size: 12px;
+      padding: 2px 4px;
+      margin-bottom: 2px;
+    }
+    
+    .card-grid {
+      gap: 0.2rem;
     }
   }
 }
