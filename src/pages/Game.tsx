@@ -31,7 +31,7 @@ const Game: React.FC = () => {
         </Button>
       </header>
       
-      <main className="flex-1 w-full max-w-7xl mx-auto px-2 sm:px-6 py-2 sm:py-4 overflow-hidden">
+      <main className="flex flex-col flex-1 w-full max-w-7xl mx-auto px-2 sm:px-6 py-2 sm:py-4">
         <p className="text-muted-foreground mb-4 max-w-2xl mx-auto text-center text-xs sm:text-sm">
           Select words by clicking the circle button. Create a story using your selected words!
         </p>

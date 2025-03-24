@@ -44,12 +44,11 @@ const WordCard: React.FC<WordCardProps> = ({ word, id, onGreenChange, onBypasser
       "word-card animate-appear",
       isGreen && "bg-green-100"
     )}>
-      {/* Green toggle button */}
+      <div className="word-card__toolbar">
       <button 
         onClick={toggleGreen} 
         className={cn(
           "card-button animate-scale group",
-          "left-12", // Position on the left
           isGreen ? "bg-green-500" : "bg-green-200 hover:bg-green-300"
         )}
         aria-label={isGreen ? "Remove green highlight" : "Highlight card green"}
@@ -57,6 +56,8 @@ const WordCard: React.FC<WordCardProps> = ({ word, id, onGreenChange, onBypasser
         <span className="w-3 h-3 sm:w-4 sm:h-4 rounded-full group-hover:bg-white/50"></span>
       </button>
       
+      <div className="word-card__toolbar-spacer" />
+
       {/* Up arrow button */}
       <button 
         onClick={toggleSelected} 
@@ -76,7 +77,7 @@ const WordCard: React.FC<WordCardProps> = ({ word, id, onGreenChange, onBypasser
       {/* Down arrow button */}
       <button 
         onClick={toggleDownSelected}
-        className="card-button animate-scale group right-12" // Position to the left of the up arrow
+        className="card-button animate-scale group"
         aria-label={downSelected ? "Deselect down arrow" : "Select down arrow"}
       >
         {downSelected ? (
@@ -88,6 +89,7 @@ const WordCard: React.FC<WordCardProps> = ({ word, id, onGreenChange, onBypasser
           <span className="w-3 h-3 sm:w-4 sm:h-4 rounded-full group-hover:bg-gray-50"></span>
         )}
       </button>
+      </div>
       
       {/* Upside down word in grey italic */}
       <div className="upside-down-title italic text-gray-400">{word}</div>
