@@ -57,7 +57,7 @@ const GameGrid: React.FC = () => {
   return (
     <>
       <div className="flex gap-2 mb-4 flex-wrap justify-center">
-        <div className="green-counter p-2 sm:p-3 rounded-lg shadow-sm inline-flex items-center gap-2 text-sm sm:text-base">
+        <div className="green-counter p-2 md:p-1 sm:p-0.5 sm:p-3 rounded-lg shadow-sm inline-flex items-center gap-2 text-sm sm:text-base">
           <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-green-500"></div>
           <span className="font-semibold">{greenCount} green cards</span>
         </div>

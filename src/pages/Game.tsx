@@ -17,9 +17,9 @@ const Game: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen max-h-screen overflow-hidden bg-background flex flex-col items-center">
-      <header className="w-full max-w-7xl mx-auto pt-4 pb-2 sm:py-6 px-2 sm:px-6 flex justify-between items-center">
-        <h1 className="text-xl sm:text-3xl font-semibold tracking-tight">Word Selection Game</h1>
+    <div className="min-h-[100dvh] overflow-hidden bg-background flex flex-col items-center">
+      <header className="game-header w-full max-w-7xl mx-auto flex justify-between items-center">
+        <h1 className="game-header__main-text font-semibold tracking-tight">Codenames duet</h1>
         <Button 
           onClick={refreshGame} 
           variant="outline" 
@@ -31,9 +31,9 @@ const Game: React.FC = () => {
         </Button>
       </header>
       
-      <main className="flex flex-col flex-1 w-full max-w-7xl mx-auto px-2 sm:px-6 py-2 sm:py-4">
-        <p className="text-muted-foreground mb-4 max-w-2xl mx-auto text-center text-xs sm:text-sm">
-          Select words by clicking the circle button. Create a story using your selected words!
+      <main className="game-main flex flex-col flex-1 w-full max-w-7xl mx-auto">
+        <p className="text-muted-foreground mb-4 md:mb-2 sm:mb-1 max-w-2xl mx-auto text-center text-xs sm:text-sm">
+          Select words by clicking the circle button.
         </p>
         <GameGrid />
       </main>
