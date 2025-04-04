@@ -8,15 +8,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 const Game: React.FC = () => {
   const [language, setLanguage] = useState<'en' | 'ru'>('en');
+  const [gameKey, setGameKey] = useState(0); // Add a key to force re-render
 
   const refreshGame = () => {
-    // This would normally refresh the game, but for now we'll just show a toast
-    // Since we'd need to lift state up to properly implement this
-    toast.success('Game refreshed', {
-      description: 'New cards have been generated',
+    // Increment the key to force a re-render of the GameGrid component
+    setGameKey(prevKey => prevKey + 1);
+    
+    // Show a toast notification
+    toast.success(language === 'en' ? 'Game refreshed' : 'Игра обновлена', {
+      description: language === 'en' ? 'New cards have been generated' : 'Новые карточки были сгенерированы',
       position: 'bottom-center',
     });
-    window.location.reload();
   };
 
   const handleLanguageChange = (value: 'en' | 'ru') => {
@@ -60,7 +62,7 @@ const Game: React.FC = () => {
             ? 'Select words by clicking the circle button. Create a story using your selected words!'
             : 'Выбирайте слова, нажимая на круглую кнопку. Создайте историю, используя выбранные слова!'}
         </p>
-        <GameGrid language={language} />
+        <GameGrid key={gameKey} language={language} />
       </main>
       
       <footer className="w-full py-2 sm:py-4 border-t border-border">
