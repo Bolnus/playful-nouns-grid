@@ -5,12 +5,11 @@ import { cn } from '@/lib/utils';
 
 interface WordCardProps {
   word: string;
-  id: string;
   onGreenChange?: (isGreen: boolean) => void;
   onBypasserChange?: (isActive: boolean) => void;
 }
 
-const WordCard: React.FC<WordCardProps> = ({ word, id, onGreenChange, onBypasserChange }) => {
+const WordCard: React.FC<WordCardProps> = ({ word, onGreenChange, onBypasserChange }) => {
   const [selected, setSelected] = useState(false);
   const [downSelected, setDownSelected] = useState(false);
   const [isGreen, setIsGreen] = useState(false);
@@ -91,8 +90,8 @@ const WordCard: React.FC<WordCardProps> = ({ word, id, onGreenChange, onBypasser
       </button>
       </div>
       
-      {/* Upside down word in grey italic */}
-      <div className="upside-down-title italic text-gray-400">{word}</div>
+      {/* Upside down word with more distinct color */}
+      <div className="upside-down-title text-indigo-500">{word}</div>
       
       <div className="card-title-container">
         <div className="card-title">{word}</div>
