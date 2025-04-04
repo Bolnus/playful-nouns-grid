@@ -1,35 +1,14 @@
-
 import React, { useMemo, useState } from 'react';
-import { faker, fakerRU } from '@faker-js/faker';
 import WordCard from './WordCard';
 import { Plus, Minus, ArrowUp, ArrowDown } from 'lucide-react';
-
-const generateRandomId = () => {
-  const numbers = Array.from({ length: 4 }, () => 
-    Math.floor(Math.random() * 10)
-  ).join('');
-  
-  const letters = Array.from({ length: 2 }, () => 
-    String.fromCharCode(65 + Math.floor(Math.random() * 26))
-  ).join('');
-  
-  return `${numbers}${letters}-${Math.floor(Math.random() * 999)}`;
-};
+import { englishNouns, russianNouns, getRandomItems, generateRandomId } from '@/utils/wordLists';
 
 const generateUniqueNouns = (count: number, language: 'en' | 'ru'): Array<{ word: string, id: string }> => {
-  const nouns = new Set<string>();
+  const wordList = language === 'ru' ? russianNouns : englishNouns;
   
-  // Use the appropriate faker instance based on language
-  const currentFaker = language === 'ru' ? fakerRU : faker;
+  const selectedWords = getRandomItems(wordList, count);
   
-  while (nouns.size < count) {
-    const noun = currentFaker.word.noun().toUpperCase();
-    if (noun.length > 3 && noun.length < 10) {
-      nouns.add(noun);
-    }
-  }
-  
-  return Array.from(nouns).map(word => ({
+  return selectedWords.map(word => ({
     word,
     id: generateRandomId()
   }));
