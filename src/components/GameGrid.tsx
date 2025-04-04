@@ -1,6 +1,6 @@
 
 import React, { useMemo, useState } from 'react';
-import { faker } from '@faker-js/faker';
+import { faker, fakerRU } from '@faker-js/faker';
 import WordCard from './WordCard';
 import { Plus, Minus, ArrowUp, ArrowDown } from 'lucide-react';
 
@@ -19,13 +19,11 @@ const generateRandomId = () => {
 const generateUniqueNouns = (count: number, language: 'en' | 'ru'): Array<{ word: string, id: string }> => {
   const nouns = new Set<string>();
   
-  // Create faker instance with the appropriate locale
-  const localeFaker = language === 'ru' 
-    ? faker.localize('ru')
-    : faker.localize('en');
+  // Use the appropriate faker instance based on language
+  const currentFaker = language === 'ru' ? fakerRU : faker;
   
   while (nouns.size < count) {
-    const noun = localeFaker.word.noun().toUpperCase();
+    const noun = currentFaker.word.noun().toUpperCase();
     if (noun.length > 3 && noun.length < 10) {
       nouns.add(noun);
     }
