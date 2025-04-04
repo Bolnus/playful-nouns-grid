@@ -19,15 +19,13 @@ const generateRandomId = () => {
 const generateUniqueNouns = (count: number, language: 'en' | 'ru'): Array<{ word: string, id: string }> => {
   const nouns = new Set<string>();
   
-  // Set the locale based on language
-  if (language === 'ru') {
-    faker.setLocale('ru');
-  } else {
-    faker.setLocale('en');
-  }
+  // Create faker instance with the appropriate locale
+  const localeFaker = language === 'ru' 
+    ? faker.localize('ru')
+    : faker.localize('en');
   
   while (nouns.size < count) {
-    const noun = faker.word.noun().toUpperCase();
+    const noun = localeFaker.word.noun().toUpperCase();
     if (noun.length > 3 && noun.length < 10) {
       nouns.add(noun);
     }
