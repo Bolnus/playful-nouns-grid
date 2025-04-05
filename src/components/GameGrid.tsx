@@ -1,10 +1,13 @@
+
 import React, { useMemo, useState } from 'react';
 import WordCard from './WordCard';
 import { Plus, Minus, ArrowUp, ArrowDown } from 'lucide-react';
-import { englishNouns, russianNouns, getRandomItems, generateRandomId } from '@/utils/wordLists';
+import { englishNounsByCEFR, russianNounsByCEFR, getRandomItems, generateRandomId } from '@/utils/wordLists';
 
-const generateUniqueNouns = (count: number, language: 'en' | 'ru'): Array<{ word: string, id: string }> => {
-  const wordList = language === 'ru' ? russianNouns : englishNouns;
+type CEFRLevel = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2';
+
+const generateUniqueNouns = (count: number, language: 'en' | 'ru', level: CEFRLevel): Array<{ word: string, id: string }> => {
+  const wordList = language === 'ru' ? russianNounsByCEFR[level] : englishNounsByCEFR[level];
   
   const selectedWords = getRandomItems(wordList, count);
   
@@ -16,10 +19,11 @@ const generateUniqueNouns = (count: number, language: 'en' | 'ru'): Array<{ word
 
 interface GameGridProps {
   language: 'en' | 'ru';
+  level: CEFRLevel;
 }
 
-const GameGrid: React.FC<GameGridProps> = ({ language }) => {
-  const cards = useMemo(() => generateUniqueNouns(25, language), [language]);
+const GameGrid: React.FC<GameGridProps> = ({ language, level }) => {
+  const cards = useMemo(() => generateUniqueNouns(25, language, level), [language, level]);
   const [greenCount, setGreenCount] = useState(0);
   const [bypassersCount, setBypassersCount] = useState(0);
   const [clearRounds, setClearRounds] = useState(0);
