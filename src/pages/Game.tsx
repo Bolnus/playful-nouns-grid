@@ -69,7 +69,7 @@ const Game: React.FC = () => {
 
   return (
     <div className="min-h-[100dvh] overflow-hidden bg-background flex flex-col items-center">
-      <header className="game-header w-full max-w-7xl mx-auto pt-4 pb-2 sm:py-6 px-2 sm:px-6 flex justify-between items-center">
+      <header className="game-header w-full max-w-7xl mx-auto flex justify-between items-center">
         <h1 className="game-header__main-text font-semibold tracking-tight">
           Codenames duet
         </h1>
