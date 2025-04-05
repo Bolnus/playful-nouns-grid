@@ -162,6 +162,7 @@
   }
 
   .card-title {
+    text-transform: uppercase;
     background-color: white;
     padding: clamp(4px, 1.5vw, 8px) clamp(5px, 2vw, 10px);
     border-radius: 4px;

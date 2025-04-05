@@ -1,21 +1,43 @@
 
-// English and Russian noun lists for the word game
+// English and Russian noun lists for the word game organized by CEFR levels
 
-export const englishNouns = [
-  "TIME", "YEAR", "PEOPLE", "WAY", "DAY", "MAN", "THING", "WOMAN", "LIFE", "CHILD", 
-  "WORLD", "SCHOOL", "STATE", "FAMILY", "STUDENT", "GROUP", "COUNTRY", "PROBLEM", "HAND", "PART",
-  "PLACE", "CASE", "WEEK", "COMPANY", "SYSTEM", "PROGRAM", "QUESTION", "WORK", "GOVERNMENT", "NUMBER",
-  "NIGHT", "POINT", "HOME", "WATER", "ROOM", "MOTHER", "AREA", "MONEY", "STORY", "FACT",
-  "MONTH", "LOT", "RIGHT", "STUDY", "BOOK", "EYE", "JOB", "WORD", "BUSINESS", "ISSUE"
-];
+import { EnglishA1 } from "./constEnglishA1";
+import { EnglishA2 } from "./constEnglishA2";
+import { EnglishB2 } from "./constEnglishB2";
+import { EnglishC1 } from "./constEnglishC1";
+import { EnglishC2 } from "./constEnglishC2";
+import { EnglishB1 } from "./constEnglisjB1";
+import { RuA1 } from "./constRuA1";
+import { RuA2 } from "./constRuA2";
+import { RuB1 } from "./constRuB1";
+import { RuB2 } from "./constRuB2";
+import { RuC1 } from "./constRuC1";
+import { RuC2 } from "./constRuC2";
 
-export const russianNouns = [
-  "ВРЕМЯ", "ГОД", "ЧЕЛОВЕК", "ДЕЛО", "ДЕНЬ", "РУКА", "РАБОТА", "СЛОВО", "МЕСТО", "ЛИЦО", 
-  "ДРУГ", "ГЛАЗ", "ВОПРОС", "ДОМ", "СТОРОНА", "МИР", "СЛУЧАЙ", "ГОЛОВА", "РЕБЕНОК", "СИЛА",
-  "КОНЕЦ", "ВИД", "СИСТЕМА", "ЧАСТЬ", "ГОРОД", "ОТНОШЕНИЕ", "ЖЕНЩИНА", "ДЕНЬГИ", "ЗЕМЛЯ", "МАШИНА",
-  "ВОДА", "ОТЕЦ", "ПРОБЛЕМА", "ЧАС", "ПРАВО", "НОГА", "РЕШЕНИЕ", "ДВЕРЬ", "ОБРАЗ", "ИСТОРИЯ",
-  "ВЛАСТЬ", "ЗАКОН", "ВОЙНА", "БОГА", "ГОЛОС", "КНИГА", "ВОЗМОЖНОСТЬ", "РЕЗУЛЬТАТ", "НОЧЬ", "СТОЛ"
-];
+// English word lists by CEFR level
+export const englishNounsByCEFR: Record<string, string[]> = {
+  A1: EnglishA1,
+  A2: EnglishA2,
+  B1: EnglishB1,
+  B2: EnglishB2,
+  C1: EnglishC1,
+  C2: EnglishC2,
+};
+
+// Russian word lists by CEFR level
+export const russianNounsByCEFR: Record<string, string[]> = {
+  A1: RuA1,
+  A2: RuA2,
+  B1: RuB1,
+  B2: RuB2,
+  C1: RuC1,
+  C2: RuC2
+};
+
+for (const key of Object.keys(englishNounsByCEFR)) {
+  englishNounsByCEFR[key] = englishNounsByCEFR[key].filter((word) => word.length < 11);
+  russianNounsByCEFR[key] = russianNounsByCEFR[key].filter((word) => word.length < 11);
+}
 
 // Helper to get random items from an array
 export const getRandomItems = <T>(array: T[], count: number): T[] => {
@@ -35,3 +57,7 @@ export const generateRandomId = () => {
   
   return `${numbers}${letters}-${Math.floor(Math.random() * 999)}`;
 };
+
+// For backward compatibility
+export const englishNouns = englishNounsByCEFR.B1;
+export const russianNouns = russianNounsByCEFR.B1;
