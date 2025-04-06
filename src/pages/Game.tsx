@@ -5,17 +5,30 @@ import { Button } from '@/components/ui/button';
 import { RefreshCcw } from 'lucide-react';
 import { toast } from 'sonner';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { CEFRLevel, WordItem } from '@/lib/types';
+import { generateAllNounsByType } from '@/utils/wordLists';
 
-type CEFRLevel = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2';
 
 const Game: React.FC = () => {
   const [language, setLanguage] = useState<'en' | 'ru'>('en');
   const [level, setLevel] = useState<CEFRLevel>('B1');
   const [gameKey, setGameKey] = useState(0); // Add a key to force re-render
+  const [cards, setCards] = React.useState<WordItem[]>([]);
+  const [allCards, setAllCards] = React.useState<WordItem[]>([]);
+
+  React.useEffect(() => {
+    setAllCards(generateAllNounsByType(language, level));
+    setGameKey(0);
+  }, [language, level]);
+
+  React.useEffect(() => {
+    const currentStart = gameKey * 25;
+    setCards(allCards.slice(currentStart, currentStart + 25));
+  }, [gameKey, allCards]);
 
   const refreshGame = () => {
     // Increment the key to force a re-render of the GameGrid component
-    setGameKey(prevKey => prevKey + 1);
+    setGameKey(prevKey => (prevKey + 2) * 25 > allCards.length ? 0 : prevKey + 1);
     
     // Show a toast notification
     toast.success(language === 'en' ? 'Game refreshed' : 'Игра обновлена', {
@@ -121,7 +134,7 @@ const Game: React.FC = () => {
             ? `Level ${level} (${getLevelDescription(level)}): Select words by clicking the circle button. Create a story using your selected words!`
             : `Уровень ${level} (${getLevelDescription(level)}): Выбирайте слова, нажимая на круглую кнопку. Создайте историю, используя выбранные слова!`}
         </p>
-        <GameGrid key={gameKey} language={language} level={level} />
+        <GameGrid language={language} cards={cards} />
       </main>
 
       <footer className="w-full py-2 sm:py-4 border-t border-border">

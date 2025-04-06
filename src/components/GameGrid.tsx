@@ -2,39 +2,33 @@
 import React, { useMemo, useState } from 'react';
 import WordCard from './WordCard';
 import { Plus, Minus, ArrowUp, ArrowDown } from 'lucide-react';
-import { englishNounsByCEFR, russianNounsByCEFR, getRandomItems, generateRandomId } from '@/utils/wordLists';
-
-type CEFRLevel = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2';
-
-const generateUniqueNouns = (count: number, language: 'en' | 'ru', level: CEFRLevel): Array<{ word: string, id: string }> => {
-  const wordList = language === 'ru' ? russianNounsByCEFR[level] : englishNounsByCEFR[level];
-  
-  const selectedWords = getRandomItems(wordList, count);
-  
-  return selectedWords.map(word => ({
-    word,
-    id: generateRandomId()
-  }));
-};
+import { WordItem } from '@/lib/types';
 
 interface GameGridProps {
   language: 'en' | 'ru';
-  level: CEFRLevel;
+  cards: WordItem[];
 }
 
-const GameGrid: React.FC<GameGridProps> = ({ language, level }) => {
-  const cards = useMemo(() => generateUniqueNouns(25, language, level), [language, level]);
-  const [greenCount, setGreenCount] = useState(0);
-  const [bypassersCount, setBypassersCount] = useState(0);
+const updateArrayOnSelection = (isActive: boolean, id: string, setSelection: React.Dispatch<React.SetStateAction<string[]>>) => {
+  if (isActive) {
+    setSelection((prev) => [...prev, id]);
+  } else {
+    setSelection((prev) => prev.filter((pendingId) => pendingId !== id));
+  }
+};
+
+const GameGrid: React.FC<GameGridProps> = ({ language, cards }) => {
+  const [greenSelection, setGreenSelection] = useState<string[]>([]);
+  const [bypasserUpSelection, setBypasserUpSelection] = useState<string[]>([]);
+  const [bypasserDownSelection, setBypasserDownSelection] = useState<string[]>([]);
   const [clearRounds, setClearRounds] = useState(0);
-  
-  const handleGreenChange = (isGreen: boolean) => {
-    setGreenCount(prev => isGreen ? prev + 1 : prev - 1);
-  };
-  
-  const handleBypasserChange = (isActive: boolean) => {
-    setBypassersCount(prev => isActive ? prev + 1 : prev - 1);
-  };
+
+  React.useEffect(() => {
+    setGreenSelection([]);
+    setBypasserUpSelection([]);
+    setBypasserDownSelection([]);
+    setClearRounds(0);
+  }, [cards]);
 
   const incrementClearRounds = () => {
     setClearRounds(prev => prev + 1);
@@ -44,13 +38,14 @@ const GameGrid: React.FC<GameGridProps> = ({ language, level }) => {
     setClearRounds(prev => (prev > 0 ? prev - 1 : 0));
   };
   
+  const bypassersCount = bypasserUpSelection.length + bypasserDownSelection.length;
   return (
     <>
       <div className="flex gap-2 mb-4 flex-wrap justify-center">
         <div className="green-counter p-2 md:p-1 sm:p-0.5 sm:p-3 rounded-lg shadow-sm inline-flex items-center gap-2 text-sm sm:text-base">
           <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-green-500"></div>
           <span className="font-semibold">
-            {language === 'en' ? `${greenCount} green cards` : `${greenCount} зеленых карт`}
+            {language === 'en' ? `${greenSelection.length} guessed words` : `${greenSelection.length} угаданных слов`}
           </span>
         </div>
         
@@ -60,13 +55,13 @@ const GameGrid: React.FC<GameGridProps> = ({ language, level }) => {
             <ArrowDown size={10} className="text-white" />
           </div>
           <span className="font-semibold">
-            {language === 'en' ? `${bypassersCount} bypassers` : `${bypassersCount} байпасеров`}
+            {language === 'en' ? `${bypassersCount} mistakes` : `${bypassersCount} ошибок`}
           </span>
         </div>
 
         <div className="clear-rounds-counter p-2 sm:p-3 rounded-lg shadow-sm inline-flex items-center gap-2 bg-blue-50 border border-blue-200 text-sm sm:text-base">
           <span className="font-semibold">
-            {language === 'en' ? `Clear rounds: ${clearRounds}` : `Раунды: ${clearRounds}`}
+            {language === 'en' ? `Clear rounds: ${clearRounds}` : `Успешные раунды: ${clearRounds}`}
           </span>
           <div className="flex gap-1">
             <button 
@@ -91,9 +86,13 @@ const GameGrid: React.FC<GameGridProps> = ({ language, level }) => {
         {cards.map((card, index) => (
           <WordCard 
             key={`card-${index}`} 
-            word={card.word} 
-            onGreenChange={handleGreenChange}
-            onBypasserChange={handleBypasserChange}
+            word={card.word}
+            isGreen={!!greenSelection.find((selectedId) => selectedId === card.id)}
+            isUp={!!bypasserUpSelection.find((selectedId) => selectedId === card.id)}
+            isDown={!!bypasserDownSelection.find((selectedId) => selectedId === card.id)}
+            onGreenChange={(isActive) => updateArrayOnSelection(isActive, card.id, setGreenSelection)}
+            onBypasserUpChange={(isActive) => updateArrayOnSelection(isActive, card.id, setBypasserUpSelection)}
+            onBypasserDownChange={(isActive) => updateArrayOnSelection(isActive, card.id, setBypasserDownSelection)}
           />
         ))}
       </div>

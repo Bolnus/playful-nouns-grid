@@ -5,39 +5,15 @@ import { cn } from '@/lib/utils';
 
 interface WordCardProps {
   word: string;
+  isGreen: boolean;
+  isDown: boolean;
+  isUp: boolean;
   onGreenChange?: (isGreen: boolean) => void;
-  onBypasserChange?: (isActive: boolean) => void;
+  onBypasserUpChange?: (isActive: boolean) => void;
+  onBypasserDownChange?: (isActive: boolean) => void;
 }
 
-const WordCard: React.FC<WordCardProps> = ({ word, onGreenChange, onBypasserChange }) => {
-  const [selected, setSelected] = useState(false);
-  const [downSelected, setDownSelected] = useState(false);
-  const [isGreen, setIsGreen] = useState(false);
-  
-  const toggleSelected = () => {
-    const newState = !selected;
-    setSelected(newState);
-    if (onBypasserChange) {
-      onBypasserChange(newState);
-    }
-  };
-
-  const toggleDownSelected = () => {
-    const newState = !downSelected;
-    setDownSelected(newState);
-    if (onBypasserChange) {
-      onBypasserChange(newState);
-    }
-  };
-
-  const toggleGreen = () => {
-    const newGreenState = !isGreen;
-    setIsGreen(newGreenState);
-    if (onGreenChange) {
-      onGreenChange(newGreenState);
-    }
-  };
-
+const WordCard: React.FC<WordCardProps> = ({ word, onGreenChange, onBypasserUpChange, onBypasserDownChange, isGreen, isDown, isUp }) => {
   return (
     <div className={cn(
       "word-card animate-appear",
@@ -45,7 +21,7 @@ const WordCard: React.FC<WordCardProps> = ({ word, onGreenChange, onBypasserChan
     )}>
       <div className="word-card__toolbar">
       <button 
-        onClick={toggleGreen} 
+        onClick={() => onGreenChange(!isGreen)} 
         className={cn(
           "card-button animate-scale group",
           isGreen ? "bg-green-500" : "bg-green-200 hover:bg-green-300"
@@ -59,11 +35,11 @@ const WordCard: React.FC<WordCardProps> = ({ word, onGreenChange, onBypasserChan
 
       {/* Up arrow button */}
       <button 
-        onClick={toggleSelected} 
+        onClick={() => onBypasserUpChange(!isUp)} 
         className="card-button animate-scale group"
-        aria-label={selected ? "Deselect card" : "Select card"}
+        aria-label={isUp ? "Deselect card" : "Select card"}
       >
-        {selected ? (
+        {isUp ? (
           <ArrowUp 
             size={14} 
             className="text-primary animate-rotate-in" 
@@ -75,11 +51,11 @@ const WordCard: React.FC<WordCardProps> = ({ word, onGreenChange, onBypasserChan
       
       {/* Down arrow button */}
       <button 
-        onClick={toggleDownSelected}
+        onClick={() => onBypasserDownChange(!isDown)}
         className="card-button animate-scale group"
-        aria-label={downSelected ? "Deselect down arrow" : "Select down arrow"}
+        aria-label={isDown ? "Deselect down arrow" : "Select down arrow"}
       >
-        {downSelected ? (
+        {isDown ? (
           <ArrowDown
             size={14}
             className="text-primary animate-rotate-in"

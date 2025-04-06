@@ -1,6 +1,7 @@
 
 // English and Russian noun lists for the word game organized by CEFR levels
 
+import { CEFRLevel, WordItem } from "@/lib/types";
 import { EnglishA1 } from "./constEnglishA1";
 import { EnglishA2 } from "./constEnglishA2";
 import { EnglishB2 } from "./constEnglishB2";
@@ -39,12 +40,6 @@ for (const key of Object.keys(englishNounsByCEFR)) {
   russianNounsByCEFR[key] = russianNounsByCEFR[key].filter((word) => word.length < 11);
 }
 
-// Helper to get random items from an array
-export const getRandomItems = <T>(array: T[], count: number): T[] => {
-  const shuffled = [...array].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count);
-};
-
 // Generate a random ID for each word
 export const generateRandomId = () => {
   const numbers = Array.from({ length: 4 }, () => 
@@ -61,3 +56,12 @@ export const generateRandomId = () => {
 // For backward compatibility
 export const englishNouns = englishNounsByCEFR.B1;
 export const russianNouns = russianNounsByCEFR.B1;
+
+export const generateAllNounsByType = (language: 'en' | 'ru', level: CEFRLevel): WordItem[] => {
+  const wordList = language === 'ru' ? russianNounsByCEFR[level] : englishNounsByCEFR[level];
+  
+  return wordList.sort(() => 0.5 - Math.random()).map(word => ({
+    word,
+    id: generateRandomId()
+  }));
+};
